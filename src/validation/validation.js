@@ -9,7 +9,6 @@ const isValid = function (value) {
   if (typeof value === "string" && value.trim().length === 0) return false;
   return true;
 };
-
 const isValidBody = function (data) {
   return Object.keys(data).length > 0;
 };
@@ -24,6 +23,7 @@ const isValidMobileNum = function (value) {
 const isValidSyntaxOfEmail = function (value) {
   if (!validator.validate(value.trim())) {
     return false;
+    
   }
   return true;
 };
@@ -38,6 +38,7 @@ let alphabetTestOfString = function (value) {
 
 const isValidObjectId = function (objectId) {
   return mongoose.Types.ObjectId.isValid(objectId)
+
 }
 
 
@@ -53,6 +54,7 @@ module.exports = {
   alphabetTestOfString,
   isValidObjectId
 };
+// module.exports.hello = isValid
 
 
 //--------------------------------------------------------------------//

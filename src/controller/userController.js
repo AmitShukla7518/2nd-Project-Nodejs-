@@ -71,9 +71,14 @@ const registerUser = async function (req, res) {
             return res.status(400).send({ status: false, message: "Please provide password with minimum or equal to 8 and maximum or equal to 15 characters 🛑" });;
         }
 
-        if (!validate.isValid(address)) {
-            return res.status(400).send({ status: false, message: "Please provide address 🛑" });
+        if (Object.keys(data).includes('address')) {
+            if (typeof address !== "object") return res.status(400).send({ status: false, message: "address should be an object" })
+
+            if (!validate.isValid(address)) {
+                return res.status(400).send({ status: false, message: "address should not be empty" });
+            }
         }
+
 
         let registration = { title, name, phone, email, password, address }
 
@@ -102,7 +107,8 @@ const loginUser = async function (req, res) {
 
         const user = await userModel.findOne({ email: data.email, password: data.password })
 
-        if (!user) return res.status(400).send({ status: false, message: "Invalid login credentials 🛑" });
+        if (!user) 
+        return res.status(404).send({ status: false, message: "Invalid login credentials 🛑" });
 
         const token = jwt.sign({
             userId: user._id,

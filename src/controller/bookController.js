@@ -59,7 +59,7 @@ const aws= require("aws-sdk")
 const bookCreation = async function (req, res) {
     try {
         let data = req.body;
-        const { title, excerpt, userId, ISBN, category, subcategory, releasedAt } = data
+        const { title, excerpt, userId, ISBN, category, subcategory, releasedAt,bookCover} = data
 
         if (!validate.isValidBody(data)) {
             return res.status(400).send({ status: false, message: "Please provide data ⚠️" })
@@ -110,30 +110,6 @@ const bookCreation = async function (req, res) {
             return res.status(400).send({ status: false, message: "subcategory must be present ⚠️" })
         }
 
-        //
-        // router.post("/write-file-aws", async function(req, res){
-
-            try{
-                let files= req.files
-                if(files && files.length>0){
-                    //upload to s3 and get the uploaded link
-                    // res.send the link back to frontend/postman
-                    let uploadedFileURL= await uploadFile( files[0] )
-                    res.status(201).send({msg: "file uploaded succesfully", data: uploadedFileURL})
-                }
-                else{
-                    res.status(400).send({ msg: "No file found" })
-                }
-                
-            }
-            catch(err){
-                res.status(500).send({msg: err})
-            }
-            
-        // })
-        
-
-        //
 
         if (!validate.isValid(releasedAt)) {
             return res.status(400).send({ status: false, message: "releasedAt must be present ⚠️" })

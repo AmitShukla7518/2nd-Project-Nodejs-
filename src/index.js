@@ -11,6 +11,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb+srv://Anish_Tiwari1531:SINGH1531@cluster0.40jpapr.mongodb.net/Group6Database", {
     useNewUrlParser: true
 })
+// mongoose.connect("localhost:27017/Group6Database", {
+//     useNewUrlParser: true
+// })
 .then( () => console.log("MongoDb is connected ✅✅"))
 .catch ( err => console.log(err) )
 app.use( multer().any())
